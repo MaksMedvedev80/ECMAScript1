@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks</title>
+</head>
+<body>
+    <script>
+        // 1) Находим минимальное число в массиве с помощью Math.min и spread оператора
+        const arr = [1, 5, 7, 9];
+        const min = Math.min(...arr);
+        console.log("Минимальное число в массиве:", min);
+
+        // 2) Функция createCounter создает счетчик и возвращает объект с методами increment и decrement
+        function createCounter() {
+            let count = 0;
+            return {
+                increment: function() {
+                    count++;
+                },
+                decrement: function() {
+                    count--;
+                },
+                getCount: function() {
+                    return count;
+                }
+            };
+        }
+
+        // Создаем счетчик
+        const counter = createCounter();
+        counter.increment();
+        console.log("Значение счетчика после увеличения:", counter.getCount());
+        counter.decrement();
+        console.log("Значение счетчика после уменьшения:", counter.getCount());
+
+        // 3) Рекурсивная функция findElementByClass находит первый элемент с указанным классом в дереве DOM
+        function findElementByClass(root, className) {
+            if (root.classList && root.classList.contains(className)) {
+                return root;
+            }
+            let foundElement = null;
+            const children = root.children;
+            for (let i = 0; i < children.length && !foundElement; i++) {
+                foundElement = findElementByClass(children[i], className);
+            }
+            return foundElement;
+        }
+
+        // Пример использования
+        const rootElement = document.getElementById('root');
+        const targetElement = findElementByClass(rootElement, 'my-class');
+        console.log("Найденный элемент:", targetElement);
+    </script>
+</body>
+</html>
